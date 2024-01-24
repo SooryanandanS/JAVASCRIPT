@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Exam</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+     
+      background-color: wheat;
+
+    }
+    .cont{
+      border: solid; color: black;
+      background-color: aliceblue;
+    }
+    .btn{
+      width: 135px;
+      height:50px;
+      font-weight:bolder;
+      font-size:12px;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      background-color: lightslategray;
+      border-radius: 20px;
+
+
+    }
+    .question{
+      background-color:white;
+      font-size:22px;
+      font-weight:bolder;
+      font-style: italic;
+      width:480px;
+      height:32px;
+      text-align: center;
+      border: solid; color: slategray;
+      padding: 10px;
+      margin: 20px;
+      color: black;
+    
+    }
+    .sbtn{
+      width:110px;
+      background-color: blue;
+      height:48px;
+      border-radius: 25px;
+      color: white;
+      font-weight:bolder;
+      
+
+    }
+    .heading{
+      font-size:26px;
+      font-style: italic;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    }
+   
+    
+
+
+  </style>
+</head>
+<center><div class="cont" style="width:670px;height: 700px;text-align: center;">
+<body>
+    <h1 class="qz"><u>QUIZ</u></h1><br>
+    <h1 class="heading">Attend The Questions</h1><br>
+
+<div id="quiz-container" class="quiz-container">
+  <center><div id="question-container" class="question"></div><br><br><br><br></center>
+  <div id="answer-buttons" class="btn-container"></div>
+  <button id="next-button" class="btn" onclick="nextQuestion()">Next</button><br><br><br>
+  <center><button id="submit-button" class="sbtn" onclick="submitAnswers()">Submit</button></center><br>
+  <div style="font-style: italic;font-weight: bold;color: red;" id="result-container" class="result"></div>
+</div>
+
+<script>
+  const questions = [
+    {
+      question: "1.  Which is the capital of Brazil?",
+      answers: [
+        { text: "Rio De Jenerio", correct: true },
+        { text: "Buenos Aires", correct: false },
+        { text: "Madrid", correct: false },
+        { text: "Rome", correct: false }
+      ]
+    },
+    {
+      question: "2.  What is 2 + 2?",
+      answers: [
+        { text: "4", correct: true },
+        { text: "6", correct: false },
+        { text: "8", correct: false },
+        { text: "10", correct: false }
+      ]
+    },
+    {
+      question: "3.  Who is The First Prime Minister Of India?",
+      answers: [
+        { text: "Dr.Rajendraprasad", correct: false },
+        { text: "Mahathma Gandhi", correct: false },
+        { text: "Jawaharlal Nehru", correct: true },
+        { text: "Manmohan Singh", correct: false }
+      ]
+    },
+    {
+      question: "4.  Where is Bekal Fort Located?",
+      answers: [
+        { text: "Kazargod", correct: true },
+        { text: "Thrissur", correct: false },
+        { text: "Malapppuram", correct: false },
+        { text: "Kannur", correct: false }
+      ]
+    },
+    // Add more questions as needed
+  ];
+
+  let currentQuestionIndex = 0;
+  let score = 0;
+
+  const questionContainer = document.getElementById("question-container");
+  const answerButtonsContainer = document.getElementById("answer-buttons");
+  const nextButton = document.getElementById("next-button");
+  const submitButton = document.getElementById("submit-button");
+  const resultContainer = document.getElementById("result-container");
+
+  function startQuiz() {
+    nextButton.style.display = "none";
+    submitButton.style.display = "none";
+    resultContainer.innerHTML = "";
+    score = 0;
+    currentQuestionIndex = 0;
+    showQuestion(questions[currentQuestionIndex]);
+  }
+
+  function showQuestion(question) {
+    questionContainer.innerText = question.question;
+    answerButtonsContainer.innerHTML = "";
+    question.answers.forEach(answer => {
+      const button = document.createElement("button");
+      button.innerText = answer.text;
+      button.classList.add("btn");
+      button.addEventListener("click", () => selectAnswer(answer));
+      answerButtonsContainer.appendChild(button);
+    });
+  }
+
+  function selectAnswer(answer) {
+    if (answer.correct) {
+      score++;
+    }
+    
+
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      showQuestion(questions[currentQuestionIndex]);
+    } else {
+      nextButton.style.display = "none";
+      submitButton.style.display = "block";
+    }
+  }
+
+  function nextQuestion() {
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      showQuestion(questions[currentQuestionIndex]);
+    }
+
+    if (currentQuestionIndex === questions.length - 1) {
+      nextButton.style.display = "none";
+      submitButton.style.display = "block";
+    }
+  }
+
+  function submitAnswers() {
+    resultContainer.innerHTML = `Your score:<br> ${score} out of ${questions.length}<br><br> Correct Answers<br>1. Rio de Jenerio<br>2. Four<br>3.Jawaharlal Nehru<br>4.Kazargod `;
+  }
+
+  // Start the quiz
+  startQuiz();
+</script>
+</body></center>
+</div>
+</html>

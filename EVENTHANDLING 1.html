@@ -1,0 +1,36 @@
+<html>
+    <head>
+     <center><h1>ADD EVENT LISTENER FUNCTION</h1> </center>
+     <style>
+        body {background-color: powderblue;}
+        h1   {color: blue;}
+        p    {color: red;}
+        </style>
+    </head>
+    <body>
+        <center><button style="width: 100px;height: 80px;background-color: yellowgreen;font-weight:bolder;font-size: 20px;border-radius: 20px;box-shadow: 20px;" id="b">TRY HERE</button>
+        <p style="font-size: 22px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight:bold" id="demo"></p></center>
+        <script>
+            var x=document.getElementById("b");
+            x.addEventListener("mouseover", myFunction);
+            x.addEventListener("click", mySecondFunction);
+            x.addEventListener("mouseout", myThirdFunction);
+            
+            function myFunction() {
+              document.getElementById("demo").innerHTML = "Mouse is on the Button<br>"
+            }
+            
+            function mySecondFunction() {
+              document.getElementById("demo").innerHTML = "Mouse is Clicked !<br>"
+            }
+            
+            function myThirdFunction() {
+              document.getElementById("demo").innerHTML = "Mouse is out<br>"
+            }
+            </script>
+            
+            </body>
+            </html>
+            
+    </body>
+</html>
